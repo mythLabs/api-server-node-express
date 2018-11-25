@@ -10,7 +10,7 @@ const app = express();
 const router = require('./router');
 
 // DB Setup
-mongoose.connect('mongodb://adminMythLabs:admin123@ds115874.mlab.com:15874/api-server-node-express-db', { useNewUrlParser: true })
+mongoose.connect('mongodb://xxx:xxx@ds115874.mlab.com:15874/api-server-node-express-db', { useNewUrlParser: true })
 mongoose.connection.once('open',() => {
     console.log('connected to database');
 })

@@ -12,7 +12,7 @@ Database - ['Mongoose','MongoDB']
 
 Authentication - ['Bcrypt-Node','Passport-JWT','Passport-Local','Passport']
 
-Also, vs code debugging enable.
+Also, vs code debugging enabled.
 
 ## How to run
 

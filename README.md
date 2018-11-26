@@ -26,4 +26,4 @@ Also, vs code debugging enabled.
 ### npm run dev
  
     1.Add a break point
-    2.Then select to node process from vs code debug section have --inspect attached to it.
+    2.Then select to node process from vs code debug section have --inspect attached to it. 

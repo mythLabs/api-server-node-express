@@ -6,23 +6,35 @@ const ExtractJwt = require("passport-jwt").ExtractJwt;
 const LocalStrategy = require("passport-local");
 
 // Create local Strategy
-const localOptions={usernameField: 'email'};
-const localStrategy = new LocalStrategy(localOptions, function(email, password, done){
+const localOptions = { usernameField: "email" };
+const localLogin = new LocalStrategy(localOptions, function(
+  email,
+  password,
+  done
+) {
+  // Find user with email
+  User.findOne({ email: email }, function(err, user) {
+    if (err) {
+      return done(err, false);
+    }
 
-    // Find user with email
-    User.findOne({email: email},
-        function(err, user) {
-          if (err) {
-            return done(err, false);
-          }
-    
-          if (!user) {
-            return  done(null, false);
-          } 
-        });
+    if (!user) {
+      return done(null, false);
+    }
+
     //Compare hashed password
-    
-})
+    user.comparePassword(password, function(err, isMatch) {
+      if (err) {
+        return done(err);
+      }
+      if (!isMatch) {
+        return done(null, false);
+      }
+
+      return done(null, user);
+    });
+  });
+});
 
 //Setup options for JWT Strategy
 const jwtOptions = {
@@ -32,19 +44,19 @@ const jwtOptions = {
 
 //Create JWT Strategy
 const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
-  User.findById(payload.sub,
-    function(err, user) {
-      if (err) {
-        return done(err, false);
-      }
+  User.findById(payload.sub, function(err, user) {
+    if (err) {
+      return done(err, false);
+    }
 
-      if (user) {
-       return  done(null, user);
-      } else {
-      return  done(null, false);
-      }
-    });
+    if (user) {
+      return done(null, user);
+    } else {
+      return done(null, false);
+    }
+  });
 });
 
-// Tell Passport to use it
+// Tell Passport to use strategies
 passport.use(jwtLogin);
+passport.use(localLogin);

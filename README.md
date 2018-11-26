@@ -17,6 +17,7 @@ Also, vs code debugging enable.
 ## How to run
 
 ### npm install
+    1. Add your Mongo Db connection string in index.js file.
 
 ### npm run dev
 

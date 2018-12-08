@@ -1,3 +1,3 @@
-module.export = {
-    secret: 'Your Own Unique Key'
+module.exports = {
+    secret: 'dfhudif874y9r84urjsdnfds%skfjhskdfhsdkf$$skdjfdskjf'
 }
